@@ -27,14 +27,13 @@
             }
         }
 
-        img {
+        .toggle-mode{
             &:hover {
                 transition: all .20s ease;
                 cursor: pointer;
                 opacity: .8;
             }
         }
-
     }
 
     .input-container {
@@ -209,9 +208,13 @@
     }
 
     .input-container,
-    .todo-container {
+    .todo-container,.status1 {
         background-color: $VeryDarkDesaturatedBlue;
         box-shadow: $box-shadow;
     }
+}
+
+.sun{
+    display: none;
 }
 

@@ -16,9 +16,11 @@
     <div class="background-One">
       <picture>
         <source media="(max-width:600px)" srcset="./images/bg-mobile-light.jpg">
-        <img src="./images/bg-desktop-light.jpg" alt="">
+        <img src="./images/bg-desktop-light.jpg" alt="background">
       </picture>
     </div>
+
+    
     <div class="background-Two"></div>
 
 
@@ -27,7 +29,10 @@
         <div class="title-text">
           <h2>TODO</h2>
         </div>
-        <img src="./images/icon-moon.svg" alt="Switch-Toggle">
+        <div class="toggle-mode">
+          <img id="moon" class="moon" src="./images/icon-moon.svg" alt="Switch-Toggle">
+          <img id="sun" class="sun" src="./images/icon-sun.svg" alt="Switch-Toggle">
+        </div>
       </div>
 
       <div class="input-container">
@@ -120,7 +125,7 @@
   </main>
 
 
-<script src="/script/app.js"></script>
+  <script src="/script/app.js"></script>
 </body>
 
 </html>

@@ -157,7 +157,7 @@ main .background-Two {
   margin-top: 5px;
   color: hsl(0, 0%, 98%);
 }
-.floating-Container .title-container img:hover {
+.floating-Container .title-container .toggle-mode:hover {
   transition: all 0.2s ease;
   cursor: pointer;
   opacity: 0.8;
@@ -296,7 +296,11 @@ main .background-Two {
   color: hsl(0, 0%, 98%);
 }
 .dark-mode .input-container,
-.dark-mode .todo-container {
+.dark-mode .todo-container, .dark-mode .status1 {
   background-color: hsl(235, 24%, 19%);
   box-shadow: 0px 0px 30px -6px rgba(0, 0, 0, 0.75);
+}
+
+.sun {
+  display: none;
 }/*# sourceMappingURL=main.css.map */
