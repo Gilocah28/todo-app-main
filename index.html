@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="./style/main.css">
+  <title>Frontend Mentor | Todo app</title>
+</head>
+
+<body>
+
+  <main id="main">
+    <div class="background-One">
+      <picture>
+        <source media="(max-width:600px)" srcset="./images/bg-mobile-light.jpg">
+        <img src="./images/bg-desktop-light.jpg" alt="">
+      </picture>
+    </div>
+    <div class="background-Two"></div>
+
+
+    <div class="floating-Container">
+      <div class="title-container">
+        <div class="title-text">
+          <h2>TODO</h2>
+        </div>
+        <img src="./images/icon-moon.svg" alt="Switch-Toggle">
+      </div>
+
+      <div class="input-container">
+        <div class="circle">
+          <img src="./images/icon-check.svg" alt="">
+        </div>
+
+        <input type="text" class="input" placeholder="Create a new tode....">
+      </div>
+
+      <div class="todo-container">
+
+        <div class="todo-data">
+
+          <div class="details">
+            <div class="text-con">
+              <div class="checkbox-wrapper-12">
+                <div class="cbx">
+                  <input id="cbx-12" type="checkbox" />
+                  <label for="cbx-12"></label>
+                  <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
+                    <path d="M2 8.36364L6.23077 12L13 2"></path>
+                  </svg>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                  <defs>
+                    <filter id="goo-12">
+                      <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
+                      <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7"
+                        result="goo-12"></fecolormatrix>
+                      <feblend in="SourceGraphic" in2="goo-12"></feblend>
+                    </filter>
+                  </defs>
+                </svg>
+              </div>
+              <p>Complete online JavaScript course</p>
+            </div>
+            <img src="./images/icon-cross.svg" alt="delete">
+          </div>
+
+          <div class="details">
+            <div class="text-con">
+              <div class="checkbox-wrapper-12">
+                <div class="cbx">
+                  <input id="cbx-12" type="checkbox" />
+                  <label for="cbx-12"></label>
+                  <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
+                    <path d="M2 8.36364L6.23077 12L13 2"></path>
+                  </svg>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                  <defs>
+                    <filter id="goo-12">
+                      <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
+                      <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7"
+                        result="goo-12"></fecolormatrix>
+                      <feblend in="SourceGraphic" in2="goo-12"></feblend>
+                    </filter>
+                  </defs>
+                </svg>
+              </div>
+              <p>Complete online JavaScript course</p>
+            </div>
+            <img src="./images/icon-cross.svg" alt="delete">
+          </div>
+
+
+        </div>
+
+        <div class="funtion-container">
+          <p><span>0</span> items left</p>
+          <div class="status">
+            <p>All</p>
+            <p>Active</p>
+            <p>Completed</p>
+          </div>
+          <p class="clear">Clear Completed</p>
+        </div>
+
+      </div>
+
+      <div class="status1">
+        <p>All</p>
+        <p>Active</p>
+        <p>Completed</p>
+      </div>
+
+    </div>
+    </div>
+  </main>
+
+
+<script src="/script/app.js"></script>
+</body>
+
+</html>

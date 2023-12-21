@@ -1,0 +1,35 @@
+// Light Theme
+$VeryLightGray: hsl(0, 0%, 98%);
+$VeryLightGrayishBlue: hsl(236, 33%, 92%);
+$LightGrayishBlue: hsl(233, 11%, 84%);
+$DarkGrayishBlue: hsl(236, 9%, 61%);
+$VeryDarkGrayishBlue: hsl(235, 19%, 35%);
+
+
+// Dark Theme
+$VeryDarkBlue: hsl(235, 21%, 11%);
+$VeryDarkDesaturatedBlue: hsl(235, 24%, 19%);
+$LightGrayishBlue: hsl(234, 39%, 85%);
+$LightGrayishBlueHover: hsl(236, 33%, 92%);
+$DarkGrayishBlue: hsl(234, 11%, 52%);
+$VeryDarkGrayishBlue: hsl(233, 14%, 35%);
+$VeryDarkGrayishBlue: hsl(237, 14%, 26%);
+
+
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+$fonstFam: 'Josefin Sans', sans-serif;
+$Fontsize: 18px;
+$pading1-5rem: 1.5rem;
+$pading1rem: 1rem;
+$pading0-8rem: .8rem;
+$margin: 1rem;
+
+
+//border
+$bradius: 8px;
+
+
+// Shadow
+$box-shadow: 0px 0px 30px -6px rgba(0,0,0,0.75);

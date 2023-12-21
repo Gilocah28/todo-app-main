@@ -1,0 +1,217 @@
+.floating-Container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 600px;
+    width: 100%;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 $pading0-8rem;
+
+        .title-text {
+            align-self: center;
+
+            h2 {
+                font-size: 2rem;
+                margin-top: 5px;
+                color: $VeryLightGray;
+            }
+        }
+
+        img {
+            &:hover {
+                transition: all .20s ease;
+                cursor: pointer;
+                opacity: .8;
+            }
+        }
+
+    }
+
+    .input-container {
+        padding: $pading0-8rem;
+        border-radius: $bradius;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+
+        .circle {
+            border: 1px solid $DarkGrayishBlue;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+            img {
+                width: 60%;
+            }
+
+
+            &:hover {
+                transition: all 500ms linear;
+                cursor: pointer;
+                background: rgb(36, 202, 244);
+                background: linear-gradient(90deg, rgba(36, 202, 244, 1) 0%, rgba(224, 66, 226, 1) 54%);
+                border: none;
+            }
+        }
+
+        .input {
+            padding: 0.3rem;
+            width: 100%;
+            border: none;
+            outline: none;
+            background: $VeryLightGray;
+
+            &::placeholder {
+                align-self: center;
+            }
+        }
+
+
+        
+
+
+
+    }
+
+    .todo-container {
+        border-radius: $bradius;
+
+        .todo-data{
+            .details{
+                border-bottom: 1px solid $LightGrayishBlue;
+                padding: 1.5rem $pading0-8rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                
+                
+                
+                &:nth-child(1){
+                    border-top:none;
+                }
+
+                .text-con{
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    
+                    p{
+                        font-weight: 400;
+                        padding-top: .3rem;
+                    }
+                }
+
+                img{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .input-container,
+    .todo-container {
+        background: $VeryLightGray;
+        box-shadow: $box-shadow;
+    }
+
+
+    .funtion-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.5rem $pading0-8rem;
+        color: $VeryDarkGrayishBlue;
+
+        .clear{
+            &:hover{
+                transition: all 200ms linear;
+                color: rgba(0, 162, 255, 0.733);
+                cursor: pointer;
+            }
+        }
+
+        .status{
+            display: flex;
+            gap: 1rem;
+
+            @include laptop{
+                display: none;
+            }
+
+            p{
+                cursor: pointer;
+
+                &:hover{
+                    transition: all 200ms linear;
+                    color: rgba(0, 162, 255, 0.733);
+                }
+            }
+        }
+    }
+
+
+    .status1{
+        background: $VeryLightGray;
+        box-shadow: $box-shadow;
+        padding: $pading0-8rem;
+        border-radius: $bradius;
+        display: none;
+        align-items: center;
+        justify-content: space-around;
+        padding-top: 1rem;
+
+        p{
+            cursor: pointer;
+
+            &:hover{
+                transition: all 200ms linear;
+                color: rgba(0, 162, 255, 0.733);
+            }
+        }
+
+        @include laptop{
+            display: flex;
+        }
+
+        
+    }
+
+}
+
+.dark-mode{
+    p{
+        color: $VeryLightGrayishBlue;
+    }
+    .input-container{
+        .input{
+            color: $VeryLightGray;
+            background-color: $VeryDarkDesaturatedBlue;
+        }
+
+        &::placeholder {
+            color: $VeryLightGray;
+        }
+    }
+
+    .input-container,
+    .todo-container {
+        background-color: $VeryDarkDesaturatedBlue;
+        box-shadow: $box-shadow;
+    }
+}
+
