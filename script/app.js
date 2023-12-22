@@ -9,9 +9,16 @@ const imageSouce = [
     </picture>`
 ]
 
+const themeSource = JSON.parse(localStorage.getItem('theme')) || []
+
 const imageBackground = document.querySelector('.background-One')
 const mainCoainter = document.getElementById('main')
 const moonToggle = document.getElementById('moon')
+
+
+const loader = (theme) => {
+    
+}
 
 moonToggle.addEventListener('click', () => {
     moonToggle.style.display = 'none'
