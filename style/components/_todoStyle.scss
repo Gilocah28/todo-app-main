@@ -140,9 +140,12 @@
                         padding-top: .3rem;
                     }
                 }
-
-                img {
+                .delete{
                     cursor: pointer;
+                    &:hover{
+                        transition: opacity .20s ease;
+                        opacity: 0.8;
+                    }
                 }
             }
         }
@@ -244,4 +247,12 @@
 
 .sun {
     display: none;
+}
+
+.line{
+    text-decoration: line-through;
+}
+
+.todoParam{
+    cursor: pointer;
 }

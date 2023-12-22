@@ -7,7 +7,7 @@ const imageSouce = [
         className: '',
         moonDisplay: 'block',
         sunDisplay: 'none',
-        backgroundClr: 'hsl(0, 0%, 98%)'
+        backgroundClr: 'hsl(0, 0%, 98%)',
     },
     {
         source: `<picture>
@@ -29,19 +29,12 @@ const toggle = document.querySelector('.toggle-mode')
 const sunToggle = document.getElementById('sun')
 const count = document.getElementById('counter')
 const body = document.querySelector('body')
-
-
-const data = localStorage.getItem('data')
-    ? JSON.parse(localStorage.getItem('data'))
-    : [];
-
-
+const data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : [];
 const todoContainer = document.querySelector('.todo-data')
 const todoEnter = document.querySelector('.circle')
 const input = document.querySelector('.input')
-
-
 const themeSource = JSON.parse(localStorage.getItem('theme')) || []
+
 
 
 window.addEventListener('load', (e) => {
@@ -52,7 +45,7 @@ window.addEventListener('load', (e) => {
 })
 
 function getItem(item) {
-    const { source, className, moonDisplay, sunDisplay,backgroundClr} = item
+    const { source, className, moonDisplay, sunDisplay, backgroundClr } = item
     moonToggle.style.display = moonDisplay
     sunToggle.style.display = sunDisplay
     imageBackground.innerHTML = source
@@ -63,7 +56,8 @@ function getItem(item) {
 moonToggle.addEventListener('click', () => {
     localStorage.setItem('theme', JSON.stringify(imageSouce[1]));
     getItem(themeSource)
-    const { source, className, moonDisplay, sunDisplay,backgroundClr } = imageSouce[1]
+
+    const { source, className, moonDisplay, sunDisplay, backgroundClr } = imageSouce[1]
     moonToggle.style.display = moonDisplay
     sunToggle.style.display = sunDisplay
     imageBackground.innerHTML = source
@@ -76,7 +70,7 @@ sunToggle.addEventListener('click', () => {
     localStorage.setItem('theme', JSON.stringify(imageSouce[0]));
     getItem(themeSource)
 
-    const { source, className, moonDisplay, sunDisplay,backgroundClr } = imageSouce[0]
+    const { source, className, moonDisplay, sunDisplay, backgroundClr } = imageSouce[0]
     moonToggle.style.display = moonDisplay
     sunToggle.style.display = sunDisplay
     imageBackground.innerHTML = source
@@ -84,19 +78,12 @@ sunToggle.addEventListener('click', () => {
     body.style.backgroundColor = backgroundClr
 });
 
-
-localStorage.clear(data)
-
-
-
-
-
-function generateTodo(inputDiv) {
+function generateTodo(inputDiv, classVal) {
     return `<div class="details">
         <div class="text-con">
         <div class="checkbox-wrapper-12">
             <div class="cbx">
-            <input id="cbx-12" type="checkbox" />
+            <input id="cbx-12" type="checkbox" / value="line">
             <label for="cbx-12"></label>
             <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
                 <path d="M2 8.36364L6.23077 12L13 2"></path>
@@ -113,17 +100,20 @@ function generateTodo(inputDiv) {
             </defs>
             </svg>
         </div>
-        <p>${inputDiv}</p>
+        <p class="todoParam ${classVal}">${inputDiv}</p>
         </div>
-        <img src="./images/icon-cross.svg" alt="delete">
+        <img src="./images/icon-cross.svg" alt="delete" class="delete">
     </div>`
 }
+
+const checkBox = document.querySelectorAll('.checkbox-wrapper-12')
+const deleteButtons = document.querySelectorAll('.delete');
+const paragraphTodo = document.querySelectorAll('.todoParam')
 
 input.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         inputValidation(input)
         counterLength()
-
     }
 })
 
@@ -140,17 +130,18 @@ const inputValidation = (inputDiv) => {
     }
 }
 
-const inputSave = (inputDiv) => {
+const inputSave = (inputDiv, classVal) => {
 
-    const str = generateTodo(inputDiv.value)
+    const str = generateTodo(inputDiv.value, classVal)
     todoContainer.innerHTML += str
     const value = inputDiv.value
 
     const todoListData = {
         todo: value,
         checkStatus: '',
-        clasName: ' '
+        clasName: ''
     }
+
     data.push(todoListData)
     const saveToLocalStorage = JSON.stringify(data)
     localStorage.setItem('data', saveToLocalStorage)
@@ -159,22 +150,24 @@ const inputSave = (inputDiv) => {
 
 function todoLoader(todo) {
     let strData = ''
-    // for (const data of todo) {
-    //     const { todo, checkStatus, clasName } = data
-    //     strData += generateTodo(todo)
-    // }
-
     for (let i = 0; i < todo.length; i++) {
         const { todo, checkStatus, clasName } = data[i]
-        strData += generateTodo(todo)
+        strData += generateTodo(todo, clasName)
     }
-
     todoContainer.innerHTML += strData
 }
 
 function counterLength() {
     count.innerHTML = data.length;
 }
+
+
+
+
+
+
+
+
 
 
 

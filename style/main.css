@@ -251,8 +251,12 @@ main .background-Two {
   font-weight: 400;
   padding-top: 0.3rem;
 }
-.floating-Container .todo-container .todo-data .details img {
+.floating-Container .todo-container .todo-data .details .delete {
   cursor: pointer;
+}
+.floating-Container .todo-container .todo-data .details .delete:hover {
+  transition: opacity 0.2s ease;
+  opacity: 0.8;
 }
 .floating-Container .input-container,
 .floating-Container .todo-container {
@@ -333,4 +337,12 @@ main .background-Two {
 
 .sun {
   display: none;
+}
+
+.line {
+  text-decoration: line-through;
+}
+
+.todoParam {
+  cursor: pointer;
 }/*# sourceMappingURL=main.css.map */
