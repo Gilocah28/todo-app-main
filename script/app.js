@@ -37,11 +37,13 @@ const themeSource = JSON.parse(localStorage.getItem('theme')) || []
 
 
 
+
 window.addEventListener('load', (e) => {
     e.preventDefault()
     getItem(themeSource)
     todoLoader(data)
     counterLength()
+    loaderBtn()
 })
 
 function getItem(item) {
@@ -78,12 +80,12 @@ sunToggle.addEventListener('click', () => {
     body.style.backgroundColor = backgroundClr
 });
 
-function generateTodo(inputDiv, classVal) {
+function generateTodo(inputDiv, classVal, checkStatus) {
     return `<div class="details">
         <div class="text-con">
-        <div class="checkbox-wrapper-12">
+        <div class="checkbox-wrapper-12 checkboxChecker">
             <div class="cbx">
-            <input id="cbx-12" type="checkbox" / value="line">
+            <input id="cbx-12" type="checkbox" / value="line" ${checkStatus ? 'checked' : ''}>
             <label for="cbx-12"></label>
             <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
                 <path d="M2 8.36364L6.23077 12L13 2"></path>
@@ -100,15 +102,15 @@ function generateTodo(inputDiv, classVal) {
             </defs>
             </svg>
         </div>
-        <p class="todoParam ${classVal}">${inputDiv}</p>
+        <p id="todoValueIndex" class="todoParam ${classVal}">${inputDiv}</p>
         </div>
-        <img src="./images/icon-cross.svg" alt="delete" class="delete">
+        <img src="./images/icon-cross.svg" alt="delete" class="delete revs">
     </div>`
 }
 
-const checkBox = document.querySelectorAll('.checkbox-wrapper-12')
-const deleteButtons = document.querySelectorAll('.delete');
-const paragraphTodo = document.querySelectorAll('.todoParam')
+
+
+
 
 input.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -130,9 +132,9 @@ const inputValidation = (inputDiv) => {
     }
 }
 
-const inputSave = (inputDiv, classVal) => {
+const inputSave = (inputDiv, classVal, check) => {
 
-    const str = generateTodo(inputDiv.value, classVal)
+    const str = generateTodo(inputDiv.value, classVal, check)
     todoContainer.innerHTML += str
     const value = inputDiv.value
 
@@ -152,7 +154,7 @@ function todoLoader(todo) {
     let strData = ''
     for (let i = 0; i < todo.length; i++) {
         const { todo, checkStatus, clasName } = data[i]
-        strData += generateTodo(todo, clasName)
+        strData += generateTodo(todo, clasName, checkStatus)
     }
     todoContainer.innerHTML += strData
 }
@@ -160,6 +162,41 @@ function todoLoader(todo) {
 function counterLength() {
     count.innerHTML = data.length;
 }
+
+function loaderBtn() {
+    const todoContainer = document.querySelector('.todo-data');
+    todoContainer.addEventListener('click', (event) => {
+        const deleteButton = event.target.closest('.revs');
+        if (deleteButton) {
+            const todoItemContainer = deleteButton.closest('.details');
+            const indexInDOM = Array.from(todoContainer.children).indexOf(todoItemContainer);
+            todoItemContainer.remove();
+            data.splice(indexInDOM, 1);
+            localStorage.setItem('data', JSON.stringify(data));
+            counterLength();
+        }
+
+        const checkBtn = event.target.closest('.checkboxChecker');
+        if (checkBtn) {
+            const todoItemContainer = checkBtn.closest('.details');
+            const indexInDOM = Array.from(todoContainer.children).indexOf(todoItemContainer);
+            const todoDataIndex = data[indexInDOM];
+            todoDataIndex.clasName = 'line';
+            todoDataIndex.checkStatus = true;
+            const saveToLocalStorage = JSON.stringify(data);
+            localStorage.setItem('data', saveToLocalStorage);
+
+            // Find the associated todoParam element and update its style
+            const todoParam = todoItemContainer.querySelector('.todoParam');
+            if (todoParam) {
+                todoParam.style.textDecoration = 'line-through';
+            }
+        }
+    });
+}
+
+
+
 
 
 
