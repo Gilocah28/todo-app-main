@@ -9,6 +9,7 @@
 
 body {
   width: 100%;
+  height: 100vh;
 }
 
 main {
@@ -32,7 +33,7 @@ main .background-Two {
   margin-top: -1rem;
 }
 
-.dark-mode .background-Two {
+.dark-mode {
   background-color: hsl(235, 24%, 19%);
 }
 
@@ -131,12 +132,30 @@ main .background-Two {
     box-shadow: 0 -36px 0 -10px transparent, 32px -16px 0 -10px transparent, 32px 16px 0 -10px transparent, 0 36px 0 -10px transparent, -32px 16px 0 -10px transparent, -32px -16px 0 -10px transparent;
   }
 }
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .floating-Container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   max-width: 600px;
+  min-height: 400px;
   width: 100%;
   padding: 1rem;
   display: flex;
@@ -204,6 +223,15 @@ main .background-Two {
 .floating-Container .todo-container {
   border-radius: 8px;
 }
+.floating-Container .todo-container .todo-data {
+  overflow: auto;
+  max-height: 380px;
+}
+@media screen and (max-width: 600px) {
+  .floating-Container .todo-container .todo-data {
+    max-height: 300px;
+  }
+}
 .floating-Container .todo-container .todo-data .details {
   border-bottom: 1px solid hsl(234, 39%, 85%);
   padding: 1.5rem 0.8rem;
@@ -237,6 +265,7 @@ main .background-Two {
   justify-content: space-between;
   padding: 1.5rem 0.8rem;
   color: hsl(237, 14%, 26%);
+  border-top: 1px solid hsl(234, 39%, 85%);
 }
 .floating-Container .funtion-container .clear:hover {
   transition: all 200ms linear;
@@ -296,7 +325,8 @@ main .background-Two {
   color: hsl(0, 0%, 98%);
 }
 .dark-mode .input-container,
-.dark-mode .todo-container, .dark-mode .status1 {
+.dark-mode .todo-container,
+.dark-mode .status1 {
   background-color: hsl(235, 24%, 19%);
   box-shadow: 0px 0px 30px -6px rgba(0, 0, 0, 0.75);
 }

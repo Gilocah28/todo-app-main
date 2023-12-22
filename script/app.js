@@ -6,7 +6,8 @@ const imageSouce = [
         </picture>`,
         className: '',
         moonDisplay: 'block',
-        sunDisplay: 'none'
+        sunDisplay: 'none',
+        backgroundClr: 'hsl(0, 0%, 98%)'
     },
     {
         source: `<picture>
@@ -15,7 +16,8 @@ const imageSouce = [
         </picture>`,
         className: 'dark-mode',
         moonDisplay: 'none',
-        sunDisplay: 'block'
+        sunDisplay: 'block',
+        backgroundClr: 'hsl(235, 24%, 19%)'
     }
 ]
 
@@ -26,6 +28,7 @@ const moonToggle = document.getElementById('moon')
 const toggle = document.querySelector('.toggle-mode')
 const sunToggle = document.getElementById('sun')
 const count = document.getElementById('counter')
+const body = document.querySelector('body')
 
 
 const data = localStorage.getItem('data')
@@ -49,21 +52,23 @@ window.addEventListener('load', (e) => {
 })
 
 function getItem(item) {
-    const { source, className, moonDisplay, sunDisplay } = item
+    const { source, className, moonDisplay, sunDisplay,backgroundClr} = item
     moonToggle.style.display = moonDisplay
     sunToggle.style.display = sunDisplay
     imageBackground.innerHTML = source
     mainCoainter.className = className
+    body.style.backgroundColor = backgroundClr
 }
 
 moonToggle.addEventListener('click', () => {
     localStorage.setItem('theme', JSON.stringify(imageSouce[1]));
     getItem(themeSource)
-    const { source, className, moonDisplay, sunDisplay } = imageSouce[1]
+    const { source, className, moonDisplay, sunDisplay,backgroundClr } = imageSouce[1]
     moonToggle.style.display = moonDisplay
     sunToggle.style.display = sunDisplay
     imageBackground.innerHTML = source
     mainCoainter.className = className
+    body.style.backgroundColor = backgroundClr
 });
 
 sunToggle.addEventListener('click', () => {
@@ -71,12 +76,16 @@ sunToggle.addEventListener('click', () => {
     localStorage.setItem('theme', JSON.stringify(imageSouce[0]));
     getItem(themeSource)
 
-    const { source, className, moonDisplay, sunDisplay } = imageSouce[0]
+    const { source, className, moonDisplay, sunDisplay,backgroundClr } = imageSouce[0]
     moonToggle.style.display = moonDisplay
     sunToggle.style.display = sunDisplay
     imageBackground.innerHTML = source
     mainCoainter.className = className
+    body.style.backgroundColor = backgroundClr
 });
+
+
+localStorage.clear(data)
 
 
 
@@ -110,8 +119,13 @@ function generateTodo(inputDiv) {
     </div>`
 }
 
+input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        inputValidation(input)
+        counterLength()
 
-
+    }
+})
 
 todoEnter.addEventListener('click', () => {
     inputValidation(input)
@@ -145,16 +159,25 @@ const inputSave = (inputDiv) => {
 
 function todoLoader(todo) {
     let strData = ''
-    for (const data of todo) {
-        const { todo, checkStatus, clasName } = data
+    // for (const data of todo) {
+    //     const { todo, checkStatus, clasName } = data
+    //     strData += generateTodo(todo)
+    // }
+
+    for (let i = 0; i < todo.length; i++) {
+        const { todo, checkStatus, clasName } = data[i]
         strData += generateTodo(todo)
     }
+
     todoContainer.innerHTML += strData
 }
 
-function counterLength (){
+function counterLength() {
     count.innerHTML = data.length;
 }
+
+
+
 
 
 

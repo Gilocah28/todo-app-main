@@ -12,63 +12,67 @@
 
 <body>
 
-  <main id="main">
-    <div class="background-One">
-      <picture>
-        <source media="(max-width:600px)" srcset="./images/bg-mobile-light.jpg">
-        <img src="./images/bg-desktop-light.jpg" alt="background">
-      </picture>
-    </div>
+  <div class="main-container">
 
-    
-    <div class="background-Two"></div>
-
-
-    <div class="floating-Container">
-      <div class="title-container">
-        <div class="title-text">
-          <h2>TODO</h2>
-        </div>
-        <div class="toggle-mode">
-          <img id="moon" class="moon" src="./images/icon-moon.svg" alt="Switch-Toggle">
-          <img id="sun" class="sun" src="./images/icon-sun.svg" alt="Switch-Toggle">
-        </div>
+    <main id="main">
+      <div class="background-One">
+        <picture>
+          <source media="(max-width:600px)" srcset="./images/bg-mobile-light.jpg">
+          <img src="./images/bg-desktop-light.jpg" alt="background">
+        </picture>
       </div>
 
-      <div class="input-container">
-        <div class="circle">
-          <img src="./images/icon-check.svg" alt="">
-        </div>
 
-        <input type="text" class="input" placeholder="Create a new tode....">
-      </div>
+      <div class="background-Two"></div>
 
-      <div class="todo-container">
 
-        <div class="todo-data">
-        </div>
-
-        <div class="funtion-container">
-          <p><span id="counter">0</span> items left</p>
-          <div class="status">
-            <p>All</p>
-            <p>Active</p>
-            <p>Completed</p>
+      <div class="floating-Container">
+        <div class="title-container">
+          <div class="title-text">
+            <h2>TODO</h2>
           </div>
-          <p class="clear">Clear Completed</p>
+          <div class="toggle-mode">
+            <img id="moon" class="moon" src="./images/icon-moon.svg" alt="Switch-Toggle">
+            <img id="sun" class="sun" src="./images/icon-sun.svg" alt="Switch-Toggle">
+          </div>
+        </div>
+
+        <div class="input-container">
+          <div class="circle">
+            <img src="./images/icon-check.svg" alt="">
+          </div>
+
+          <input type="text" class="input" placeholder="Create a new tode....">
+        </div>
+
+        <div class="todo-container">
+
+          <div class="todo-data">
+          </div>
+
+          <div class="funtion-container">
+            <p><span id="counter">0</span> items left</p>
+            <div class="status">
+              <p>All</p>
+              <p>Active</p>
+              <p>Completed</p>
+            </div>
+            <p class="clear">Clear Completed</p>
+          </div>
+
+        </div>
+
+        <div class="status1">
+          <p>All</p>
+          <p>Active</p>
+          <p>Completed</p>
         </div>
 
       </div>
-
-      <div class="status1">
-        <p>All</p>
-        <p>Active</p>
-        <p>Completed</p>
-      </div>
-
-    </div>
-    </div>
+  </div>
   </main>
+  </div>
+
 
 
   <script src="/script/app.js"></script>

@@ -8,6 +8,7 @@
 
 body{
     width: 100%;
+    height: 100vh;
 }
 
 main{
@@ -35,9 +36,13 @@ main{
     }
 }
 
+
+
+
 .dark-mode{
-    .background-Two{
-        background-color: $VeryDarkDesaturatedBlue;
-    }
+    background-color: $VeryDarkDesaturatedBlue;
+    
 }
+
+
 

@@ -1,11 +1,30 @@
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 .floating-Container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 600px;
+    min-height: 400px;
     width: 100%;
     padding: 1rem;
+
 
     display: flex;
     flex-direction: column;
@@ -27,7 +46,7 @@
             }
         }
 
-        .toggle-mode{
+        .toggle-mode {
             &:hover {
                 transition: all .20s ease;
                 cursor: pointer;
@@ -81,7 +100,7 @@
         }
 
 
-        
+
 
 
 
@@ -90,32 +109,39 @@
     .todo-container {
         border-radius: $bradius;
 
-        .todo-data{
-            .details{
+        .todo-data {
+            overflow: auto;
+            max-height: 380px;
+
+            @include laptop{
+                max-height: 300px;
+            }
+
+            .details {
                 border-bottom: 1px solid $LightGrayishBlue;
                 padding: 1.5rem $pading0-8rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                
-                
-                
-                &:nth-child(1){
-                    border-top:none;
+
+
+
+                &:nth-child(1) {
+                    border-top: none;
                 }
 
-                .text-con{
+                .text-con {
                     display: flex;
                     align-items: center;
                     gap: 1rem;
-                    
-                    p{
+
+                    p {
                         font-weight: 400;
                         padding-top: .3rem;
                     }
                 }
 
-                img{
+                img {
                     cursor: pointer;
                 }
             }
@@ -129,33 +155,33 @@
     }
 
 
-    .funtion-container{
+    .funtion-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 1.5rem $pading0-8rem;
         color: $VeryDarkGrayishBlue;
-
-        .clear{
-            &:hover{
+        border-top: 1px solid $LightGrayishBlue;
+        .clear {
+            &:hover {
                 transition: all 200ms linear;
                 color: rgba(0, 162, 255, 0.733);
                 cursor: pointer;
             }
         }
 
-        .status{
+        .status {
             display: flex;
             gap: 1rem;
 
-            @include laptop{
+            @include laptop {
                 display: none;
             }
 
-            p{
+            p {
                 cursor: pointer;
 
-                &:hover{
+                &:hover {
                     transition: all 200ms linear;
                     color: rgba(0, 162, 255, 0.733);
                 }
@@ -164,7 +190,7 @@
     }
 
 
-    .status1{
+    .status1 {
         background: $VeryLightGray;
         box-shadow: $box-shadow;
         padding: $pading0-8rem;
@@ -174,30 +200,31 @@
         justify-content: space-around;
         padding-top: 1rem;
 
-        p{
+        p {
             cursor: pointer;
 
-            &:hover{
+            &:hover {
                 transition: all 200ms linear;
                 color: rgba(0, 162, 255, 0.733);
             }
         }
 
-        @include laptop{
+        @include laptop {
             display: flex;
         }
 
-        
+
     }
 
 }
 
-.dark-mode{
-    p{
+.dark-mode {
+    p {
         color: $VeryLightGrayishBlue;
     }
-    .input-container{
-        .input{
+
+    .input-container {
+        .input {
             color: $VeryLightGray;
             background-color: $VeryDarkDesaturatedBlue;
         }
@@ -208,13 +235,13 @@
     }
 
     .input-container,
-    .todo-container,.status1 {
+    .todo-container,
+    .status1 {
         background-color: $VeryDarkDesaturatedBlue;
         box-shadow: $box-shadow;
     }
 }
 
-.sun{
+.sun {
     display: none;
 }
-
