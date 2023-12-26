@@ -21,68 +21,6 @@ const imageSouce = [
     }
 ]
 
-
-
-
-
-const imageBackground = document.querySelector('.background-One')
-const mainCoainter = document.getElementById('main')
-const moonToggle = document.getElementById('moon')
-const toggle = document.querySelector('.toggle-mode')
-const sunToggle = document.getElementById('sun')
-const count = document.getElementById('counter')
-const body = document.querySelector('body')
-const data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : [];
-const todoContainer = document.querySelector('.todo-data')
-const todoEnter = document.querySelector('.circle')
-const input = document.querySelector('.input')
-const themeSource = JSON.parse(localStorage.getItem('theme')) || []
-
-
-
-
-window.addEventListener('load', (e) => {
-    e.preventDefault()
-    getItem(themeSource)
-    todoLoader(data)
-    counterLength()
-    loaderBtn()
-})
-
-function getItem(item) {
-    const { source, className, moonDisplay, sunDisplay, backgroundClr } = item
-    moonToggle.style.display = moonDisplay
-    sunToggle.style.display = sunDisplay
-    imageBackground.innerHTML = source
-    mainCoainter.className = className
-    body.style.backgroundColor = backgroundClr
-}
-
-moonToggle.addEventListener('click', () => {
-    localStorage.setItem('theme', JSON.stringify(imageSouce[1]));
-    getItem(themeSource)
-
-    const { source, className, moonDisplay, sunDisplay, backgroundClr } = imageSouce[1]
-    moonToggle.style.display = moonDisplay
-    sunToggle.style.display = sunDisplay
-    imageBackground.innerHTML = source
-    mainCoainter.className = className
-    body.style.backgroundColor = backgroundClr
-});
-
-sunToggle.addEventListener('click', () => {
-
-    localStorage.setItem('theme', JSON.stringify(imageSouce[0]));
-    getItem(themeSource)
-
-    const { source, className, moonDisplay, sunDisplay, backgroundClr } = imageSouce[0]
-    moonToggle.style.display = moonDisplay
-    sunToggle.style.display = sunDisplay
-    imageBackground.innerHTML = source
-    mainCoainter.className = className
-    body.style.backgroundColor = backgroundClr
-});
-
 function generateTodo(inputDiv, classVal, checkStatus) {
     return `<div class="details">
         <div class="text-con">
@@ -115,88 +53,27 @@ function generateTodo(inputDiv, classVal, checkStatus) {
 
 
 
-input.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        inputValidation(input)
-        counterLength()
-    }
-})
+const imageBackground = document.querySelector('.background-One')
+const mainCoainter = document.getElementById('main')
+const moonToggle = document.getElementById('moon')
+const toggle = document.querySelector('.toggle-mode')
+const sunToggle = document.getElementById('sun')
+const count = document.getElementById('counter')
+const body = document.querySelector('body')
+const data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : [];
+const todoContainer = document.querySelector('.todo-data')
+const todoEnter = document.querySelector('.circle')
+const input = document.querySelector('.input')
+const themeSource = JSON.parse(localStorage.getItem('theme')) || []
 
-todoEnter.addEventListener('click', () => {
-    inputValidation(input)
-    counterLength()
-})
 
-const inputValidation = (inputDiv) => {
-    if (inputDiv.value === '') {
-        alert('Should not empty the field')
-    } else {
-        inputSave(inputDiv)
-    }
-}
 
-const inputSave = (inputDiv, classVal, check) => {
 
-    const str = generateTodo(inputDiv.value, classVal, check)
-    todoContainer.innerHTML += str
-    const value = inputDiv.value
 
-    const todoListData = {
-        todo: value,
-        checkStatus: '',
-        clasName: ''
-    }
 
-    data.push(todoListData)
-    const saveToLocalStorage = JSON.stringify(data)
-    localStorage.setItem('data', saveToLocalStorage)
-    inputDiv.value = ''
-}
 
-function todoLoader(todo) {
-    let strData = ''
-    for (let i = 0; i < todo.length; i++) {
-        const { todo, checkStatus, clasName } = data[i]
-        strData += generateTodo(todo, clasName, checkStatus)
-    }
-    todoContainer.innerHTML += strData
-}
 
-function counterLength() {
-    count.innerHTML = data.length;
-}
 
-function loaderBtn() {
-    const todoContainer = document.querySelector('.todo-data');
-    todoContainer.addEventListener('click', (event) => {
-        const deleteButton = event.target.closest('.revs');
-        if (deleteButton) {
-            const todoItemContainer = deleteButton.closest('.details');
-            const indexInDOM = Array.from(todoContainer.children).indexOf(todoItemContainer);
-            todoItemContainer.remove();
-            data.splice(indexInDOM, 1);
-            localStorage.setItem('data', JSON.stringify(data));
-            counterLength();
-        }
-
-        const checkBtn = event.target.closest('.checkboxChecker');
-        if (checkBtn) {
-            const todoItemContainer = checkBtn.closest('.details');
-            const indexInDOM = Array.from(todoContainer.children).indexOf(todoItemContainer);
-            const todoDataIndex = data[indexInDOM];
-            todoDataIndex.clasName = 'line';
-            todoDataIndex.checkStatus = true;
-            const saveToLocalStorage = JSON.stringify(data);
-            localStorage.setItem('data', saveToLocalStorage);
-
-            // Find the associated todoParam element and update its style
-            const todoParam = todoItemContainer.querySelector('.todoParam');
-            if (todoParam) {
-                todoParam.style.textDecoration = 'line-through';
-            }
-        }
-    });
-}
 
 
 
