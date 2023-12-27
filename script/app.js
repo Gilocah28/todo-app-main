@@ -1,6 +1,3 @@
-
-
-
 const imageSouce = [
     {
         source: `<picture>
@@ -83,33 +80,34 @@ const inputField = document.querySelector('.input')
 const SubmitBtn = document.querySelector('.circle')
 const todoContainer = document.querySelector('.todo-data')
 
-const listGenerator = (inputValue) => {
+const listGenerator = (inputValue, dataClassName, checkStatus) => {
     return `<div class="details">
-    <div class="text-con">
-      <div class="checkbox-wrapper-12">
-        <div class="cbx">
-          <input id="cbx-12" type="checkbox" />
-          <label for="cbx-12"></label>
-          <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
-            <path d="M2 8.36364L6.23077 12L13 2"></path>
-          </svg>
+        <div class="text-con">
+            <div class="checkbox-wrapper-12">
+                <div class="cbx">
+                    <input id="cbx-12" type="checkbox" ${checkStatus ? 'checked' : ''}/>
+                    <label for="cbx-12"></label>
+                    <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
+                        <path d="M2 8.36364L6.23077 12L13 2"></path>
+                    </svg>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <defs>
+                        <filter id="goo-12">
+                            <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
+                            <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7"
+                                result="goo-12"></fecolormatrix>
+                            <feblend in="SourceGraphic" in2="goo-12"></feblend>
+                        </filter>
+                    </defs>
+                </svg>
+            </div>
+            <p id="todoValueIndex" class="todoParam ${dataClassName ? 'line' : ''}">${inputValue}</p>
         </div>
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-          <defs>
-            <filter id="goo-12">
-              <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
-              <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7"
-                result="goo-12"></fecolormatrix>
-              <feblend in="SourceGraphic" in2="goo-12"></feblend>
-            </filter>
-          </defs>
-        </svg>
-      </div>
-      <p>${inputValue}</p>
-    </div>
-    <img src="./images/icon-cross.svg" alt="delete">
-  </div>`
+        <img src="./images/icon-cross.svg" alt="delete" class="delete revs">
+    </div>`;
 }
+
 
 
 
@@ -118,25 +116,172 @@ const checker = (field) => {
         alert('Input field should not empty')
     } else {
         todoContainer.innerHTML += listGenerator(field.value)
+        saveData()
+        inputField.value = ''
     }
 }
 
 SubmitBtn.addEventListener('click', () => {
     checker(inputField)
+    todoCounter(dataTodo)
+
+})
+
+inputField.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        checker(inputField)
+        todoCounter(dataTodo)
+    }
 })
 
 // step 5 save todo to local Storage
 const dataTodo = JSON.parse(localStorage.getItem('data')) || []
-console.log(dataTodo);
 
-const saveData = () => {
+
+function saveData() {
+    const todoData = {
+        id: new Date(),
+        input: inputField.value,
+        checkStatus: '',
+        dataClassName: ''
+    }
+    dataTodo.push(todoData)
+    const todoInfo = JSON.stringify(dataTodo)
+    localStorage.setItem('data', todoInfo)
+}
+
+// step 6 load the todo List
+function dataLoad(data) {
+    let strData = ''
+    for (const { input, checkStatus, dataClassName } of data) {
+        strData += listGenerator(input, checkStatus, dataClassName)
+    }
+    todoContainer.innerHTML = strData
+}
+
+// step 7 delete item from local storage
+
+function remove() {
+    todoContainer.addEventListener('click', (e) => {
+        const deleteBtn = e.target.closest('.revs')
+        if (deleteBtn) {
+            const dataOfTodo = deleteBtn.closest('.details')
+            const indexOfItem = Array.from(todoContainer.children).indexOf(dataOfTodo)
+            dataOfTodo.remove()
+            dataTodo.splice(indexOfItem, 1)
+            const todoInfo = JSON.stringify(dataTodo)
+            localStorage.setItem('data', todoInfo)
+            todoCounter(dataTodo)
+        }
+    })
+}
+
+// step 8 update the data of check btn
+function checkStatusUpdate() {
+    todoContainer.addEventListener('click', (e) => {
+        const checkBtn = e.target.closest('.checkbox-wrapper-12');
+        if (checkBtn) {
+            e.preventDefault();
+            const dataOfTodo = checkBtn.closest('.details');
+            const indexOfItem = Array.from(todoContainer.children).indexOf(dataOfTodo);
+
+            if (dataTodo[indexOfItem].checkStatus === 'checked') {
+                dataTodo[indexOfItem].checkStatus = '';
+                dataTodo[indexOfItem].dataClassName = ''; 
+            } else {
+                dataTodo[indexOfItem].checkStatus = 'checked';
+                dataTodo[indexOfItem].dataClassName = 'line';
+            }
+
+            const todoInfo = JSON.stringify(dataTodo);
+            localStorage.setItem('data', todoInfo);
+            dataLoad(dataTodo);
+            todoCounter(dataTodo)
+        }
+    });
+}
+
+
+// step 9 create the count of the todo
+function todoCounter(data) {
+    const counterElement = document.getElementById('counter');
+    const infoElement = document.getElementById('info');
     
+    let count = 0;
+
+    if (data.length !== 0) {
+
+        for (let i = 0; i < data.length; i++) {
+            const { dataClassName } = data[i];
+            if (dataClassName !== 'line') {
+                count++;
+                
+            }
+        }
+        counterElement.innerText = `${count} items left`;
+        infoElement.innerText = '';
+        
+    } else {
+        counterElement.innerText = '';
+        infoElement.innerText = 'No items left';
+    }
 }
 
 
 
 
-// step 6 load the todo List
+// step 9 clear or remove complete todo data
+document.querySelector('.clear').addEventListener('click', () => {
+
+    for (let i = dataTodo.length - 1; i >= 0; i--) {
+        if (dataTodo[i].dataClassName === 'line') {
+            dataTodo.splice(i, 1);
+        }
+    }
+
+    const todoInfo = JSON.stringify(dataTodo);
+    localStorage.setItem('data', todoInfo);
+    dataLoad(dataTodo);
+    todoCounter(dataTodo)
+});
+
+
+// show all completed todo
+const completedTodo = (data) => {
+    let result = ''
+    for (let i = 0; i < data.length; i++) {
+        const { input, checkStatus, dataClassName } = data[i]
+        if (dataClassName === 'line') {
+            result += listGenerator(input, checkStatus, dataClassName)
+        }
+    }
+    todoContainer.innerHTML = result
+    console.log(result);
+}
+
+const activeTodo = (data) => {
+    let result = ''
+    for (let i = 0; i < data.length; i++) {
+        const { input, checkStatus, dataClassName } = data[i]
+        if (dataClassName === '') {
+            result += listGenerator(input, checkStatus, dataClassName)
+        }
+    }
+    todoContainer.innerHTML = result
+}
+
+
+document.getElementById('completed-two').addEventListener('click', () => {
+    completedTodo(dataTodo)
+})
+
+document.getElementById('active-two').addEventListener('click', () => {
+    activeTodo(dataTodo)
+})
+
+document.getElementById('all-two').addEventListener('click', () => {
+    dataLoad(dataTodo)
+})
 
 
 
@@ -144,40 +289,8 @@ const saveData = () => {
 window.addEventListener('load', (e) => {
     e.preventDefault()
     loaderThemes(theme);
+    dataLoad(dataTodo)
+    todoCounter(dataTodo)
+    remove()
+    checkStatusUpdate()
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
