@@ -187,7 +187,7 @@ function checkStatusUpdate() {
 
             if (dataTodo[indexOfItem].checkStatus === 'checked') {
                 dataTodo[indexOfItem].checkStatus = '';
-                dataTodo[indexOfItem].dataClassName = ''; 
+                dataTodo[indexOfItem].dataClassName = '';
             } else {
                 dataTodo[indexOfItem].checkStatus = 'checked';
                 dataTodo[indexOfItem].dataClassName = 'line';
@@ -206,26 +206,30 @@ function checkStatusUpdate() {
 function todoCounter(data) {
     const counterElement = document.getElementById('counter');
     const infoElement = document.getElementById('info');
-    
+
     let count = 0;
 
     if (data.length !== 0) {
-
         for (let i = 0; i < data.length; i++) {
             const { dataClassName } = data[i];
             if (dataClassName !== 'line') {
                 count++;
-                
             }
         }
-        counterElement.innerText = `${count} items left`;
-        infoElement.innerText = '';
-        
+
+        if (count > 0) {
+            counterElement.innerText = `${count} items left`;
+            infoElement.innerText = '';
+        } else {
+            counterElement.innerText = '';
+            infoElement.innerText = 'All items completed';
+        }
     } else {
         counterElement.innerText = '';
         infoElement.innerText = 'No items left';
     }
 }
+
 
 
 
@@ -269,6 +273,18 @@ const activeTodo = (data) => {
     }
     todoContainer.innerHTML = result
 }
+
+document.getElementById('completed-one').addEventListener('click', () => {
+    completedTodo(dataTodo)
+})
+
+document.getElementById('active-one').addEventListener('click', () => {
+    activeTodo(dataTodo)
+})
+
+document.getElementById('all-one').addEventListener('click', () => {
+    dataLoad(dataTodo)
+})
 
 
 document.getElementById('completed-two').addEventListener('click', () => {
