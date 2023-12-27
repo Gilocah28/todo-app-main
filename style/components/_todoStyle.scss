@@ -113,13 +113,17 @@
             overflow: auto;
             max-height: 380px;
 
-            @include laptop{
+            @include laptop {
                 max-height: 300px;
+            }
+
+            @include mobile {
+                max-height: 250px;
             }
 
             .details {
                 border-bottom: 1px solid $LightGrayishBlue;
-                padding: 1.5rem $pading0-8rem;
+                padding: 1.3rem $pading0-8rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -140,9 +144,11 @@
                         padding-top: .3rem;
                     }
                 }
-                .delete{
+
+                .delete {
                     cursor: pointer;
-                    &:hover{
+
+                    &:hover {
                         transition: opacity .20s ease;
                         opacity: 0.8;
                     }
@@ -164,7 +170,8 @@
         justify-content: space-between;
         padding: 1.5rem $pading0-8rem;
         color: $VeryDarkGrayishBlue;
-        border-top: 1px solid $LightGrayishBlue;
+
+        // border-top: 1px solid $LightGrayishBlue;
         .clear {
             &:hover {
                 transition: all 200ms linear;
@@ -183,6 +190,8 @@
 
             p {
                 cursor: pointer;
+
+
 
                 &:hover {
                     transition: all 200ms linear;
@@ -205,6 +214,10 @@
 
         p {
             cursor: pointer;
+
+            @include mobile {
+                font-size: .8rem;
+            }
 
             &:hover {
                 transition: all 200ms linear;
@@ -249,11 +262,25 @@
     display: none;
 }
 
-.line{
+.line {
     text-decoration: line-through;
     opacity: 0.7;
 }
 
-.todoParam{
+.todoParam {
     cursor: pointer;
+}
+
+@include mobile {
+    p {
+        font-size: .8rem;
+    }
+
+    span {
+        font-size: .8rem;
+    }
+
+    .input {
+        font-size: .8rem;
+    }
 }

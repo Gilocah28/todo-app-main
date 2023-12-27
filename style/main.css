@@ -232,9 +232,14 @@ main .background-Two {
     max-height: 300px;
   }
 }
+@media screen and (max-width: 375px) {
+  .floating-Container .todo-container .todo-data {
+    max-height: 250px;
+  }
+}
 .floating-Container .todo-container .todo-data .details {
   border-bottom: 1px solid hsl(234, 39%, 85%);
-  padding: 1.5rem 0.8rem;
+  padding: 1.3rem 0.8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -269,7 +274,6 @@ main .background-Two {
   justify-content: space-between;
   padding: 1.5rem 0.8rem;
   color: hsl(237, 14%, 26%);
-  border-top: 1px solid hsl(234, 39%, 85%);
 }
 .floating-Container .funtion-container .clear:hover {
   transition: all 200ms linear;
@@ -304,6 +308,11 @@ main .background-Two {
 }
 .floating-Container .status1 p {
   cursor: pointer;
+}
+@media screen and (max-width: 375px) {
+  .floating-Container .status1 p {
+    font-size: 0.8rem;
+  }
 }
 .floating-Container .status1 p:hover {
   transition: all 200ms linear;
@@ -346,4 +355,16 @@ main .background-Two {
 
 .todoParam {
   cursor: pointer;
+}
+
+@media screen and (max-width: 375px) {
+  p {
+    font-size: 0.8rem;
+  }
+  span {
+    font-size: 0.8rem;
+  }
+  .input {
+    font-size: 0.8rem;
+  }
 }/*# sourceMappingURL=main.css.map */

@@ -43,6 +43,7 @@ const saveThemes = (theme, index) => {
 const themesGenerator = (index) => {
     backgroundClrSrc.style.backgroundColor = imageSouce[index].backgroundClr
     backgroundClrSrc.className = imageSouce[index].className
+    mainBody.style.backgroundColor = imageSouce[index].backgroundClr
     backgroundImageSrc.innerHTML = imageSouce[index].source
     sunBtn.style.display = imageSouce[index].sunDisplay
     moonBtn.style.display = imageSouce[index].moonDisplay
@@ -54,6 +55,7 @@ const themesGenerator = (index) => {
 const loaderThemes = (theme) => {
     const { source, className, moonDisplay, sunDisplay, backgroundClr } = theme
     backgroundClrSrc.style.backgroundColor = backgroundClr
+    mainBody.style.backgroundColor = backgroundClr
     backgroundClrSrc.className = className
     backgroundImageSrc.innerHTML = source
     sunBtn.style.display = sunDisplay
