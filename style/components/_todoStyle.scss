@@ -111,7 +111,7 @@
 
         .todo-data {
             overflow: auto;
-            max-height: 380px;
+            
 
             @include laptop {
                 max-height: 300px;
@@ -269,6 +269,18 @@
 
 .todoParam {
     cursor: pointer;
+
+    word-wrap: break-word;
+    max-width: 450px;
+    line-height: 1.5rem;
+    letter-spacing: 1px;
+    @include laptop{
+        max-width: 320px;
+        word-wrap: break-word;
+        font-size: .8rem;
+    }
+
+
 }
 
 @include mobile {

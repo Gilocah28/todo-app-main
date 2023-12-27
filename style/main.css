@@ -225,7 +225,6 @@ main .background-Two {
 }
 .floating-Container .todo-container .todo-data {
   overflow: auto;
-  max-height: 380px;
 }
 @media screen and (max-width: 600px) {
   .floating-Container .todo-container .todo-data {
@@ -355,6 +354,17 @@ main .background-Two {
 
 .todoParam {
   cursor: pointer;
+  word-wrap: break-word;
+  max-width: 450px;
+  line-height: 1.5rem;
+  letter-spacing: 1px;
+}
+@media screen and (max-width: 600px) {
+  .todoParam {
+    max-width: 320px;
+    word-wrap: break-word;
+    font-size: 0.8rem;
+  }
 }
 
 @media screen and (max-width: 375px) {

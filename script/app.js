@@ -136,8 +136,36 @@ inputField.addEventListener('keypress', (e) => {
     }
 })
 
+const SampleData = [
+    {
+        id: '2023-12-27T09:22:44.484Z',
+        input: 'Complete application', 
+        checkStatus: 'checked', 
+        dataClassName: 'line'
+    },
+    {
+        id: '2023-12-27T09:22:44.484Z',
+        input: 'Is should work fine, you just cannot interact with database aside from getting data', 
+        checkStatus: '', 
+        dataClassName: ''
+    },
+    {
+        id: '2023-12-27T09:22:44.484Z',
+        input: 'For the next app I will make sure to create something really functional', 
+        checkStatus: '', 
+        dataClassName: ''
+    },
+    {
+        id: '2023-12-27T09:22:44.484Z',
+        input: 'Wrote the database in sqlite, so no hosting it is', 
+        checkStatus: '', 
+        dataClassName: ''
+    }
+]
+
 // step 5 save todo to local Storage
-const dataTodo = JSON.parse(localStorage.getItem('data')) || []
+const dataTodo = JSON.parse(localStorage.getItem('data')) || SampleData
+console.log(dataTodo);
 
 
 function saveData() {
