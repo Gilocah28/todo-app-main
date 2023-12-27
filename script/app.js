@@ -83,7 +83,7 @@ const SubmitBtn = document.querySelector('.circle')
 const todoContainer = document.querySelector('.todo-data')
 
 const listGenerator = (inputValue, dataClassName, checkStatus) => {
-    return `<div class="details">
+    return `<div class="details" draggable="true">
         <div class="text-con">
             <div class="checkbox-wrapper-12">
                 <div class="cbx">
@@ -301,14 +301,74 @@ document.getElementById('all-two').addEventListener('click', () => {
     dataLoad(dataTodo)
 })
 
+function addDragAndDropListeners() {
+    const todoItems = document.querySelectorAll('.details');
+
+    todoItems.forEach((item) => {
+        item.addEventListener('dragstart', handleDragStart);
+        item.addEventListener('dragenter', handleDragEnter);
+        item.addEventListener('dragover', handleDragOver);
+        item.addEventListener('dragleave', handleDragLeave);
+        item.addEventListener('drop', handleDrop);
+        item.addEventListener('dragend', handleDragEnd);
+    });
+}
+
+
+let dragSrcElement = null;
+let dragSrcIndex = 0;
+
+function handleDragStart(e) {
+    this.style.opacity = '0.5';
+    dragSrcElement = this;
+    dragSrcIndex = Array.from(this.parentNode.children).indexOf(this);
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.innerHTML);
+}
+
+function handleDragEnter(e) {
+    this.classList.add('over');
+}
+
+function handleDragOver(e) {
+    if (e.preventDefault) {
+        e.preventDefault();
+    }
+    e.dataTransfer.dropEffect = 'move';
+    return false;
+}
+
+function handleDragLeave() {
+    this.classList.remove('over');
+}
+
+function handleDrop(e) {
+    if (dragSrcElement !== this) {
+        const dropIndex = Array.from(this.parentNode.children).indexOf(this);
+        const removedItem = dataTodo.splice(dragSrcIndex, 1)[0];
+        dataTodo.splice(dropIndex, 0, removedItem);
+        const todoInfo = JSON.stringify(dataTodo);
+        localStorage.setItem('data', todoInfo);
+        dataLoad(dataTodo);
+    }
+    return false;
+}
+
+function handleDragEnd() {
+    this.style.opacity = '1';
+    document.querySelectorAll('.details').forEach((item) => {
+        item.classList.remove('over');
+    });
+}
 
 
 
 window.addEventListener('load', (e) => {
-    e.preventDefault()
+    e.preventDefault();
     loaderThemes(theme);
-    dataLoad(dataTodo)
-    todoCounter(dataTodo)
-    remove()
-    checkStatusUpdate()
+    dataLoad(dataTodo);
+    todoCounter(dataTodo);
+    remove();
+    checkStatusUpdate();
+    addDragAndDropListeners();
 });
